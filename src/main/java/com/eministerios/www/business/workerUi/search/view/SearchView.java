@@ -23,8 +23,9 @@ public class SearchView extends JPanel{
     private JButton btnShow;
     private UiComponents uiComponents;
 
-    //@Autowired
-    public SearchView() {
+    @Autowired
+    public SearchView(UiComponents uiComponents) {
+        this.uiComponents = uiComponents;
         initialize();
     }
 

@@ -21,8 +21,4 @@ public interface WorkerRepository extends JpaRepository<Worker,Long> {
 
     @Query("SELECT w FROM Worker w WHERE LOWER(w.profession) = LOWER(:profession)")
     public List<Worker> findByProfession(@Param("profession") String profession);
-
-/*    @Modifying
-    @Query("UPDATE Worker w set w.firstname = ?1, u.lastname = ?2 where u.id = ?3")
-    void setUserInfoById(String firstname, String lastname, Integer userId);*/
 }
