@@ -77,4 +77,24 @@ public class SearchView extends JPanel{
 
         add(listPanel, BorderLayout.CENTER);
     }
+
+    public JButton getBtnSearch() {
+        return btnSearch;
+    }
+
+    public JButton getBtnShow() {
+        return btnShow;
+    }
+
+    public JTextField getTfSearchItem() {
+        return tfSearchItem;
+    }
+
+    public JTable getTblList() {
+        return tblList;
+    }
+
+    public void clearTextField(){
+        tfSearchItem.setText("");
+    }
 }

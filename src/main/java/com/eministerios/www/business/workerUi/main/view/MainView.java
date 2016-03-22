@@ -39,16 +39,6 @@ public class MainView extends JFrame{
         setTitle("Projeto Escola de Ministérios");
         setSize(600, 500);
         setLocation(300,100);
-/*        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
-        }*/
     }
 
     public void basicControl(){

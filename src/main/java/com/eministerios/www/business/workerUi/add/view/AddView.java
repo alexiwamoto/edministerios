@@ -33,6 +33,8 @@ public class AddView extends JPanel {
 
     private UiComponents uiComponents;
 
+    private Long id;
+    private boolean isEdit = false;
 
     @Autowired
     public AddView(UiComponents uiComponents) {
@@ -292,5 +294,21 @@ public class AddView extends JPanel {
 
     public void setBtnClearFields(JButton btnClearFields) {
         this.btnClearFields = btnClearFields;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isEdit() {
+        return isEdit;
+    }
+
+    public void setEdit(boolean edit) {
+        isEdit = edit;
     }
 }

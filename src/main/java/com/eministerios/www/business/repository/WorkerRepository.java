@@ -2,6 +2,7 @@ package com.eministerios.www.business.repository;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -20,4 +21,8 @@ public interface WorkerRepository extends JpaRepository<Worker,Long> {
 
     @Query("SELECT w FROM Worker w WHERE LOWER(w.profession) = LOWER(:profession)")
     public List<Worker> findByProfession(@Param("profession") String profession);
+
+/*    @Modifying
+    @Query("UPDATE Worker w set w.firstname = ?1, u.lastname = ?2 where u.id = ?3")
+    void setUserInfoById(String firstname, String lastname, Integer userId);*/
 }

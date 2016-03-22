@@ -10,6 +10,7 @@ import com.eministerios.www.business.workerUi.add.view.AddView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
@@ -68,12 +69,16 @@ public class AddController {
                     ValidationError validationError = errors.get();
                     Notifications.showFormValidationAlert(validationError.getMessage());
                 } else {
+                    if(addView.isEdit())
+                        worker.setId(addView.getId());
                     workerService.save(worker);
+                    JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso",
+                            "Sucesso.", JOptionPane.PLAIN_MESSAGE);
+                    addView.clearFields();
                 }
-
-
-                System.out.printf("Salvou");
+                addView.setEdit(false);
             }
         });
     }
+
 }
