@@ -4,6 +4,7 @@ package com.eministerios.www.business.workerUi.search.controller;
 import com.eministerios.www.business.entity.domain.Worker;
 import com.eministerios.www.business.service.WorkerService;
 import com.eministerios.www.business.workerUi.list.model.WorkerTableModel;
+import com.eministerios.www.business.workerUi.print.view.PrintView;
 import com.eministerios.www.business.workerUi.search.view.SearchView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,12 +24,15 @@ public class SearchController {
 
     private SearchView searchView;
 
+    private PrintView printView;
+
     private WorkerService workerService;
 
     @Autowired
-    public SearchController(SearchView searchView, WorkerService workerService) {
+    public SearchController(SearchView searchView, PrintView printView, WorkerService workerService) {
         this.workerService = workerService;
         this.searchView = searchView;
+        this.printView = printView;
         addListeners();
         addModel();
         addAncestorListener();
@@ -48,7 +52,7 @@ public class SearchController {
         searchView.getBtnShow().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                printView.setVisible(true);
             }
         });
     }
