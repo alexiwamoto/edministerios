@@ -104,7 +104,6 @@ public class ListController {
         addView.addAncestorListener(new AncestorListener() {
             @Override
             public void ancestorAdded(AncestorEvent event) {
-
             }
 
             @Override

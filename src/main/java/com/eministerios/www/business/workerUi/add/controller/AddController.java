@@ -41,15 +41,6 @@ public class AddController {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 addView.clearFields();
-                workerService.findByProfession("pedreiro");
-                /*DirectoryChooser dc = new DirectoryChooser();
-                File file = dc.showDialog(null);
-                if (file != null) {
-                    String strFormat = "/Curriculo_" + employee.getName() + employee.getLastName() + ".pdf";
-                    file = new File(file.getAbsolutePath() + strFormat);
-                    CurriculoHelper ch = new CurriculoHelper(employee, file.toString());
-                }*/
-                System.out.println("Conectou");
             }
         });
 
