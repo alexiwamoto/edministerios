@@ -83,6 +83,8 @@ public class ListController {
         Worker worker = workerTableModel.getItem(selectedRow);
         addView.getTfName().setText(worker.getName());
         addView.getTfLastName().setText(worker.getLastname());
+        addView.getRadioButtonAutonomous().setSelected(getSelected(worker.getType()));
+        addView.getRadioButtonBusinessMan().setSelected(!getSelected(worker.getType()));
         addView.getTfAddress().setText(worker.getAddress());
         addView.getTfEmail1().setText(worker.getEmail1());
         addView.getTfEmail2().setText(worker.getEmail2());
@@ -92,6 +94,12 @@ public class ListController {
         addView.getTfDescription().setText(worker.getDescription());
         addView.setId(worker.getId());
         addView.setEdit(true);
+    }
+
+    public boolean getSelected(String type){
+        if(type.equals("Autônomo"))
+            return true;
+        return false;
     }
 
     public void deleteItem(){

@@ -39,6 +39,9 @@ public class Worker implements Serializable {
   @Column(name = "lastname", nullable = false)
   private String lastname;
 
+  @Column(name = "type", nullable = false)
+  private String type;
+
   @Column(name = "address")
   private String address;
 
@@ -63,9 +66,10 @@ public class Worker implements Serializable {
   public Worker() {
   }
 
-  public Worker(String name, String lastname, String address, String email_1, String email_2, String phone_1, String phone_2, String profession, String description) {
+  public Worker(String name, String lastname, String type, String address, String email_1, String email_2, String phone_1, String phone_2, String profession, String description) {
     this.name = name;
     this.lastname = lastname;
+    this.type = type;
     this.address = address;
     this.email_1 = email_1;
     this.email_2 = email_2;
@@ -97,6 +101,14 @@ public class Worker implements Serializable {
 
   public void setLastname(String lastname) {
     this.lastname = lastname;
+  }
+
+  public String getType() {
+    return type;
+  }
+
+  public void setType(String type) {
+    this.type = type;
   }
 
   public String getAddress() {

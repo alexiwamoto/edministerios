@@ -31,6 +31,9 @@ public class AddView extends JPanel {
     private JButton btnCancel;
     private JButton btnClearFields;
 
+    private JRadioButton radioButtonAutonomous;
+    private JRadioButton radioButtonBusinessMan;
+
     private UiComponents uiComponents;
 
     private Long id;
@@ -78,7 +81,7 @@ public class AddView extends JPanel {
 
     public void createDataPanel(){
         JPanel dataPanel = new JPanel();
-        uiComponents.createStandartPanel(dataPanel, new MigLayout("", "[][grow]", "[][][][][][][][][]"));
+        uiComponents.createStandartPanel(dataPanel, new MigLayout("", "[][grow]", "[][][][][][][][][][]"));
 
         JLabel lblName = new JLabel();
         uiComponents.createStandardLabel(lblName, "Nome:");
@@ -91,6 +94,20 @@ public class AddView extends JPanel {
 
         tfLastName = new JTextField();
         uiComponents.createStandardTF(tfLastName, "Silva");
+
+        JLabel lblType = new JLabel();
+        uiComponents.createStandardLabel(lblType, "Tipo:");
+
+        ButtonGroup bg = new ButtonGroup();
+        radioButtonAutonomous = new JRadioButton();
+        radioButtonAutonomous.setSelected(true);
+        radioButtonBusinessMan = new JRadioButton();
+
+        uiComponents.createStandardRadioButton(radioButtonAutonomous, "Autônomo");
+        uiComponents.createStandardRadioButton(radioButtonBusinessMan, "Empresário");
+
+        bg.add(radioButtonAutonomous);
+        bg.add(radioButtonBusinessMan);
 
         JLabel lblAddress = new JLabel();
         uiComponents.createStandardLabel(lblAddress, "Endereço:");
@@ -140,8 +157,11 @@ public class AddView extends JPanel {
         dataPanel.add(tfName, "cell 1 0,growx");
         dataPanel.add(lblLastName, "cell 0 1");
         dataPanel.add(tfLastName, "cell 1 1,growx");
-        dataPanel.add(lblAddress, "cell 0 2");
-        dataPanel.add(tfAddress, "cell 1 2,growx");
+        dataPanel.add(lblType, "cell 0 2");
+        dataPanel.add(radioButtonAutonomous,"cell 1 2");
+        dataPanel.add(radioButtonBusinessMan, "cell 1 2");
+        dataPanel.add(lblAddress, "cell 0 3");
+        dataPanel.add(tfAddress, "cell 1 3,growx");
         dataPanel.add(lblEmail1, "cell 0 4");
         dataPanel.add(tfEmail1, "cell 1 4,growx");
         dataPanel.add(lblEmail2, "cell 0 5");
@@ -178,6 +198,7 @@ public class AddView extends JPanel {
         Worker worker = new Worker();
         worker.setName(tfName.getText());
         worker.setLastname(tfLastName.getText());
+        worker.setType(getSelected());
         worker.setAddress(tfAddress.getText());
         worker.setEmail1(tfEmail1.getText());
         worker.setEmail2(tfEmail2.getText());
@@ -191,6 +212,7 @@ public class AddView extends JPanel {
     public void clearFields(){
         tfName.setText("");
         tfLastName.setText("");
+        radioButtonAutonomous.setSelected(true);
         tfAddress.setText("");
         tfEmail1.setText("");
         tfEmail2.setText("");
@@ -198,6 +220,13 @@ public class AddView extends JPanel {
         tfPhone2.setText("");
         tfProfession.setText("");
         tfDescription.setText("");
+    }
+
+    public String getSelected(){
+        if(radioButtonAutonomous.isSelected())
+            return "Autônomo";
+        else
+            return "Empresário";
     }
 
     public JTextField getTfEmail1() {
@@ -230,6 +259,22 @@ public class AddView extends JPanel {
 
     public void setTfLastName(JTextField tfLastName) {
         this.tfLastName = tfLastName;
+    }
+
+    public JRadioButton getRadioButtonAutonomous() {
+        return radioButtonAutonomous;
+    }
+
+    public void setRadioButtonAutonomous(JRadioButton radioButtonAutonomous) {
+        this.radioButtonAutonomous = radioButtonAutonomous;
+    }
+
+    public JRadioButton getRadioButtonBusinessMan() {
+        return radioButtonBusinessMan;
+    }
+
+    public void setRadioButtonBusinessMan(JRadioButton radioButtonBusinessMan) {
+        this.radioButtonBusinessMan = radioButtonBusinessMan;
     }
 
     public JTextField getTfAddress() {
