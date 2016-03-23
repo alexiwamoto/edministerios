@@ -24,6 +24,13 @@ public class UiComponents {
         return jButton;
     }
 
+    public JRadioButton createStandardRadioButton(JRadioButton jRadioButton, String label){
+        jRadioButton.setText(label);
+        jRadioButton.setForeground(new Color(255, 255, 255));
+        jRadioButton.setFont(new Font("Arial", Font.PLAIN, 13));
+        return jRadioButton;
+    }
+
     public JLabel createStandardLabel(JLabel jLabel, String label){
         jLabel.setText(label);
         jLabel.setFont(new Font("Arial", Font.PLAIN, 12));
