@@ -53,6 +53,11 @@ public class SearchController {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 printView.setVisible(true);
+
+                int selectedRow = searchView.getTblList().getSelectedRow();
+
+                Worker worker = workerTableModel.getItem(selectedRow);
+                printView.setWorker(worker);
             }
         });
     }

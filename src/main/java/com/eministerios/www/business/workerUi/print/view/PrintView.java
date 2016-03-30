@@ -1,5 +1,8 @@
 package com.eministerios.www.business.workerUi.print.view;
 
+import com.eministerios.www.business.entity.domain.Worker;
+import com.eministerios.www.business.workerUi.util.components.UiComponents;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -15,7 +18,15 @@ public class PrintView extends JFrame{
 
     private JPanel commandsPanel;
 
-    public PrintView(){
+    private JButton btnPrint;
+
+    private UiComponents uiComponents;
+
+    private Worker worker;
+
+    @Autowired
+    public PrintView(UiComponents uiComponents){
+        this.uiComponents = uiComponents;
         initialize();
     }
 
@@ -37,14 +48,37 @@ public class PrintView extends JFrame{
     }
 
     public void addComponents(){
-        infoPanel = new JPanel();
-        infoPanel.setBackground(Color.BLACK);
-        infoPanel.setSize(200,600);
-        commandsPanel = new JPanel();
-        commandsPanel.setBackground(Color.BLUE);
-        commandsPanel.setSize(300,600);
-        add(infoPanel, BorderLayout.PAGE_START);
+        createCommandsPanel();
 
-        add(commandsPanel, BorderLayout.SOUTH);
+        createInfoPanel();
+
+
+    }
+
+    public void createInfoPanel(){
+        infoPanel = new JPanel();
+        infoPanel.setBackground(Color.WHITE);
+
+        this.add(infoPanel, BorderLayout.CENTER);
+    }
+
+    public void createCommandsPanel(){
+        commandsPanel = new JPanel();
+        commandsPanel.setBackground(Color.WHITE);
+
+        btnPrint = new JButton();
+        uiComponents.createStandardButton(btnPrint, "Imprimir");
+
+        commandsPanel.add(btnPrint);
+
+        this.add(commandsPanel, BorderLayout.SOUTH);
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 }
