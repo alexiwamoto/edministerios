@@ -1,5 +1,6 @@
 package com.eministerios.www.business.workerUi.search.view;
 
+import com.eministerios.www.business.entity.domain.Worker;
 import com.eministerios.www.business.workerUi.util.components.UiComponents;
 import net.miginfocom.swing.MigLayout;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class SearchView extends JPanel{
     private JTable tblList;
     private JButton btnShow;
     private UiComponents uiComponents;
+
+    private Worker worker;
 
     @Autowired
     public SearchView(UiComponents uiComponents) {
@@ -97,5 +100,13 @@ public class SearchView extends JPanel{
 
     public void clearTextField(){
         tfSearchItem.setText("");
+    }
+
+    public Worker getWorker() {
+        return worker;
+    }
+
+    public void setWorker(Worker worker) {
+        this.worker = worker;
     }
 }

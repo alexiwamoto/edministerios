@@ -19,7 +19,7 @@ public class WorkerValidator extends ValidationSupport implements Validator<Work
                 isNullOrEmptyString(worker.getAddress()) ||
                 isNullOrEmptyString(worker.getEmail1()) ||
                 isNullOrEmptyString(worker.getEmail2()) ||
-                isNullOrEmptyString(worker.getPhone1()) ||
+                /*isNullOrEmptyString(worker.getPhone1()) ||*/
                 isNullOrEmptyString(worker.getPhone2()) ||
                 isNullOrEmptyString(worker.getProfession()) ||
                 isNullOrEmptyString(worker.getDescription()))

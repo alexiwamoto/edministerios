@@ -52,12 +52,13 @@ public class SearchController {
         searchView.getBtnShow().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                printView.setVisible(true);
-
                 int selectedRow = searchView.getTblList().getSelectedRow();
 
                 Worker worker = workerTableModel.getItem(selectedRow);
+
                 printView.setWorker(worker);
+
+                printView.setVisible(true);
             }
         });
     }

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.text.ParseException;
 
 /**
  * Created by alexandre on 04/03/16.
@@ -22,8 +24,8 @@ public class AddView extends JPanel {
     private JTextField tfName;
     private JTextField tfLastName;
     private JTextField tfAddress;
-    private JTextField tfPhone1;
-    private JTextField tfPhone2;
+    private JFormattedTextField tfPhone1;
+    private JFormattedTextField tfPhone2;
     private JTextField tfProfession;
     private JTextArea tfDescription;
 
@@ -130,13 +132,23 @@ public class AddView extends JPanel {
         JLabel lblPhone1 = new JLabel();
         uiComponents.createStandardLabel(lblPhone1, "Phone 1:");
 
-        tfPhone1 = new JTextField();
+        try {
+            tfPhone1 = new JFormattedTextField(new MaskFormatter("(##)#####-####"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         uiComponents.createStandardTF(tfPhone1, "11999999999");
 
         JLabel lblPhone2 = new JLabel();
         uiComponents.createStandardLabel(lblPhone2, "Phone 2:");
 
-        tfPhone2 = new JTextField();
+        try {
+            tfPhone2 = new JFormattedTextField(new MaskFormatter("(##)#####-####"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         uiComponents.createStandardTF(tfPhone2, "11999999999");
 
         JLabel lblProfession = new JLabel();
@@ -202,8 +214,10 @@ public class AddView extends JPanel {
         worker.setAddress(tfAddress.getText());
         worker.setEmail1(tfEmail1.getText());
         worker.setEmail2(tfEmail2.getText());
-        worker.setPhone1(tfPhone1.getText());
-        worker.setPhone2(tfPhone2.getText());
+        String phone = tfPhone1.getText().replace("(","").replace(")","").replace("-","");
+        worker.setPhone1(phone);
+        String phone2 = tfPhone2.getText().replace("(","").replace(")","").replace("-","");
+        worker.setPhone2(phone2);
         worker.setProfession(tfProfession.getText());
         worker.setDescription(tfDescription.getText());
         return worker;
@@ -285,19 +299,19 @@ public class AddView extends JPanel {
         this.tfAddress = tfAddress;
     }
 
-    public JTextField getTfPhone1() {
+    public JFormattedTextField getTfPhone1() {
         return tfPhone1;
     }
 
-    public void setTfPhone1(JTextField tfPhone1) {
+    public void setTfPhone1(JFormattedTextField tfPhone1) {
         this.tfPhone1 = tfPhone1;
     }
 
-    public JTextField getTfPhone2() {
+    public JFormattedTextField getTfPhone2() {
         return tfPhone2;
     }
 
-    public void setTfPhone2(JTextField tfPhone2) {
+    public void setTfPhone2(JFormattedTextField tfPhone2) {
         this.tfPhone2 = tfPhone2;
     }
 
@@ -356,4 +370,5 @@ public class AddView extends JPanel {
     public void setEdit(boolean edit) {
         isEdit = edit;
     }
+
 }
