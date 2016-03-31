@@ -58,5 +58,6 @@
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.184" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" name="Maven: com.toedter:jcalendar:1.4" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.3" level="project" />
   </component>
 </module>

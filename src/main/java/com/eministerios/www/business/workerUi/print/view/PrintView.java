@@ -14,7 +14,7 @@ import java.awt.*;
  * Created by alexandre on 22/03/16.
  */
 @Component
-public class PrintView extends JFrame{
+public class PrintView extends JFrame {
 
     private JPanel infoPanel;
 
@@ -38,37 +38,34 @@ public class PrintView extends JFrame{
     private Worker worker;
 
     @Autowired
-    public PrintView(UiComponents uiComponents){
+    public PrintView(UiComponents uiComponents) {
         this.uiComponents = uiComponents;
         initialize();
     }
 
-    public void initialize(){
+    public void initialize() {
         setUpLayout();
         basicControl();
         addComponents();
     }
 
-    public void setUpLayout(){
+    public void setUpLayout() {
         setTitle("Profissional");
         setSize(400, 600);
-        setLocation(300,100);
-        setLayout(new BorderLayout(0,0));
+        setLocation(300, 100);
+        setLayout(new BorderLayout(0, 0));
     }
 
-    public void basicControl(){
+    public void basicControl() {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
-    public void addComponents(){
+    public void addComponents() {
         createCommandsPanel();
-
         createInfoPanel();
-
-
     }
 
-    public void createInfoPanel(){
+    public void createInfoPanel() {
         infoPanel = new JPanel();
         infoPanel.setBackground(Color.WHITE);
         infoPanel.setLayout(new MigLayout("", "[40px][grow][20px]", "[40px][][][][][][][][][][][grow]"));
@@ -79,7 +76,7 @@ public class PrintView extends JFrame{
 
         lblName = new JLabel();
         lblName.setFont(new Font("Verdana", Font.ITALIC, 14));
-        infoPanel.add(lblName,"cell 1 2");
+        infoPanel.add(lblName, "cell 1 2");
 
         lblLastName = new JLabel();
         lblLastName.setFont(new Font("Verdana", Font.ITALIC, 14));
@@ -87,7 +84,7 @@ public class PrintView extends JFrame{
 
         lblType = new JLabel();
         lblType.setFont(new Font("Verdana", Font.ITALIC, 14));
-        infoPanel.add(lblType,"cell 1 3");
+        infoPanel.add(lblType, "cell 1 3");
 
         lblAddress = new JLabel();
         lblAddress.setFont(new Font("Verdana", Font.ITALIC, 14));
@@ -123,12 +120,12 @@ public class PrintView extends JFrame{
         this.add(infoPanel, BorderLayout.CENTER);
     }
 
-    public void createCommandsPanel(){
+    public void createCommandsPanel() {
         commandsPanel = new JPanel();
         commandsPanel.setBackground(Color.WHITE);
 
         btnPrint = new JButton();
-        uiComponents.createStandardButton(btnPrint, "Imprimir");
+        uiComponents.createStandardButton(btnPrint, "Gerar Pdf");
 
         commandsPanel.add(btnPrint);
 
@@ -221,5 +218,13 @@ public class PrintView extends JFrame{
 
     public void setLblProfession(JLabel lblProfession) {
         this.lblProfession = lblProfession;
+    }
+
+    public JButton getBtnPrint() {
+        return btnPrint;
+    }
+
+    public void setBtnPrint(JButton btnPrint) {
+        this.btnPrint = btnPrint;
     }
 }

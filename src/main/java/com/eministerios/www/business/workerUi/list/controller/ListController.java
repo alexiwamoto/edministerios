@@ -41,20 +41,20 @@ public class ListController {
         addAncestorListener();
     }
 
-    public void addModel(){
+    public void addModel() {
         workerTableModel = new WorkerTableModel();
         listView.getTblListWorkers().setModel(workerTableModel);
         listView.getTblListWorkers().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
     }
 
-    public void fillTable(){
+    public void fillTable() {
         clearTable();
         List<Worker> workers = workerService.findAll();
         workerTableModel.addItems(workers);
     }
 
-    public void addListeners(){
+    public void addListeners() {
         listView.getBtnEdit().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -67,17 +67,16 @@ public class ListController {
             public void actionPerformed(ActionEvent actionEvent) {
                 int result = JOptionPane.showConfirmDialog(null, "Deseja Realmente excluir o item selecionado?",
                         "Atenção.", JOptionPane.YES_NO_OPTION);
-                if(result == JOptionPane.YES_OPTION){
-                        deleteItem();
+                if (result == JOptionPane.YES_OPTION) {
+                    deleteItem();
                 }
                 fillTable();
-                System.out.println("Cancelou");
             }
         });
 
     }
 
-    public void fillEditFields(){
+    public void fillEditFields() {
         int selectedRow = listView.getTblListWorkers().getSelectedRow();
         MainView.getTabbedPane().setSelectedIndex(0);
         Worker worker = workerTableModel.getItem(selectedRow);
@@ -96,13 +95,13 @@ public class ListController {
         addView.setEdit(true);
     }
 
-    public boolean getSelected(String type){
-        if(type.equals("Autônomo"))
+    public boolean getSelected(String type) {
+        if (type.equals("Autônomo"))
             return true;
         return false;
     }
 
-    public void deleteItem(){
+    public void deleteItem() {
         int selectedRow = listView.getTblListWorkers().getSelectedRow();
         Worker worker = workerTableModel.getItem(selectedRow);
         workerService.remove(worker);
@@ -125,7 +124,7 @@ public class ListController {
         });
     }
 
-    public void clearTable(){
+    public void clearTable() {
         workerTableModel.clear();
     }
 

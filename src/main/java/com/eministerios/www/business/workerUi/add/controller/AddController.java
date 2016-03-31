@@ -47,7 +47,7 @@ public class AddController {
         addView.getBtnCancel().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("Cancelou");
+
             }
         });
 

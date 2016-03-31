@@ -133,23 +133,23 @@ public class AddView extends JPanel {
         uiComponents.createStandardLabel(lblPhone1, "Phone 1:");
 
         try {
-            tfPhone1 = new JFormattedTextField(new MaskFormatter("(##)#####-####"));
+            tfPhone1 = new JFormattedTextField(new MaskFormatter("(##)*####-####"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        uiComponents.createStandardTF(tfPhone1, "11999999999");
+        uiComponents.createStandardFTF(tfPhone1, "11999999999");
 
         JLabel lblPhone2 = new JLabel();
         uiComponents.createStandardLabel(lblPhone2, "Phone 2:");
 
         try {
-            tfPhone2 = new JFormattedTextField(new MaskFormatter("(##)#####-####"));
+            tfPhone2 = new JFormattedTextField(new MaskFormatter("(##)*####-####"));
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        uiComponents.createStandardTF(tfPhone2, "11999999999");
+        uiComponents.createStandardFTF(tfPhone2, "11999999999");
 
         JLabel lblProfession = new JLabel();
         uiComponents.createStandardLabel(lblProfession, "Profissão:");
