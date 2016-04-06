@@ -71,6 +71,7 @@ public class ListController {
                     deleteItem();
                 }
                 fillTable();
+                addView.clearFields();
             }
         });
 
@@ -82,8 +83,7 @@ public class ListController {
         Worker worker = workerTableModel.getItem(selectedRow);
         addView.getTfName().setText(worker.getName());
         addView.getTfLastName().setText(worker.getLastname());
-        addView.getRadioButtonAutonomous().setSelected(getSelected(worker.getType()));
-        addView.getRadioButtonBusinessMan().setSelected(!getSelected(worker.getType()));
+        setSelected(worker.getType());
         addView.getTfAddress().setText(worker.getAddress());
         addView.getTfEmail1().setText(worker.getEmail1());
         addView.getTfEmail2().setText(worker.getEmail2());
@@ -95,10 +95,24 @@ public class ListController {
         addView.setEdit(true);
     }
 
-    public boolean getSelected(String type) {
-        if (type.equals("Autônomo"))
-            return true;
-        return false;
+    public void setSelected(String type) {
+        switch (type){
+            case "Autônomo":
+                addView.getRadioButtonAutonomous().setSelected(true);
+                addView.getRadioButtonBusinessMan().setSelected(false);
+                addView.getRadioButtonFreeLancer().setSelected(false);
+                break;
+            case "Empresário":
+                addView.getRadioButtonAutonomous().setSelected(false);
+                addView.getRadioButtonBusinessMan().setSelected(true);
+                addView.getRadioButtonFreeLancer().setSelected(false);
+                break;
+            case "Free Lancer":
+                addView.getRadioButtonAutonomous().setSelected(false);
+                addView.getRadioButtonBusinessMan().setSelected(false);
+                addView.getRadioButtonFreeLancer().setSelected(true);
+                break;
+        }
     }
 
     public void deleteItem() {
