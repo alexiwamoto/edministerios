@@ -35,6 +35,7 @@ public class AddView extends JPanel {
 
     private JRadioButton radioButtonAutonomous;
     private JRadioButton radioButtonBusinessMan;
+    private JRadioButton radioButtonFreeLancer;
 
     private UiComponents uiComponents;
 
@@ -104,12 +105,15 @@ public class AddView extends JPanel {
         radioButtonAutonomous = new JRadioButton();
         radioButtonAutonomous.setSelected(true);
         radioButtonBusinessMan = new JRadioButton();
+        radioButtonFreeLancer = new JRadioButton();
 
         uiComponents.createStandardRadioButton(radioButtonAutonomous, "Autônomo");
         uiComponents.createStandardRadioButton(radioButtonBusinessMan, "Empresário");
+        uiComponents.createStandardRadioButton(radioButtonFreeLancer, "Free Lancer");
 
         bg.add(radioButtonAutonomous);
         bg.add(radioButtonBusinessMan);
+        bg.add(radioButtonFreeLancer);
 
         JLabel lblAddress = new JLabel();
         uiComponents.createStandardLabel(lblAddress, "Endereço:");
@@ -172,6 +176,7 @@ public class AddView extends JPanel {
         dataPanel.add(lblType, "cell 0 2");
         dataPanel.add(radioButtonAutonomous,"cell 1 2");
         dataPanel.add(radioButtonBusinessMan, "cell 1 2");
+        dataPanel.add(radioButtonFreeLancer, "cell 1 2");
         dataPanel.add(lblAddress, "cell 0 3");
         dataPanel.add(tfAddress, "cell 1 3,growx");
         dataPanel.add(lblEmail1, "cell 0 4");
@@ -195,6 +200,8 @@ public class AddView extends JPanel {
         uiComponents.createStandartPanel(dataPanel, new MigLayout("", "[120px][][][]", "[]"));
 
         btnClearFields = new JButton();
+        btnSave = new JButton("Salvar");
+        //btnSave.setIcon(new ImageIcon(getClass().getResource("/images/saveIcon.png")));
         dataPanel.add(uiComponents.createStandardButton(btnClearFields, "Limpar Campos"), "cell 1 0");
 
         btnCancel = new JButton();
@@ -239,8 +246,10 @@ public class AddView extends JPanel {
     public String getSelected(){
         if(radioButtonAutonomous.isSelected())
             return "Autônomo";
-        else
+        else if(radioButtonBusinessMan.isSelected())
             return "Empresário";
+        else
+            return  "Free Lancer";
     }
 
     public JTextField getTfEmail1() {
@@ -289,6 +298,14 @@ public class AddView extends JPanel {
 
     public void setRadioButtonBusinessMan(JRadioButton radioButtonBusinessMan) {
         this.radioButtonBusinessMan = radioButtonBusinessMan;
+    }
+
+    public JRadioButton getRadioButtonFreeLancer() {
+        return radioButtonFreeLancer;
+    }
+
+    public void setRadioButtonFreeLancer(JRadioButton radioButtonFreeLancer) {
+        this.radioButtonFreeLancer = radioButtonFreeLancer;
     }
 
     public JTextField getTfAddress() {
