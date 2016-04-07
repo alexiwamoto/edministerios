@@ -1,71 +1,145 @@
 package com.eministerios.www.business.workerUi.list.controller;
 
+import com.eministerios.www.business.entity.domain.Worker;
+import com.eministerios.www.business.service.WorkerService;
+import com.eministerios.www.business.workerUi.add.view.AddView;
+import com.eministerios.www.business.workerUi.list.model.WorkerTableModel;
 import com.eministerios.www.business.workerUi.list.view.ListView;
 import com.eministerios.www.business.workerUi.main.view.MainView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * Created by alexandre on 07/03/16.
  */
 @Controller
 public class ListController {
+    private WorkerService workerService;
+
+    private WorkerTableModel workerTableModel;
 
     private ListView listView;
 
+    private AddView addView;
+
     @Autowired
-    public ListController(ListView listView) {
+    public ListController(ListView listView, AddView addView, WorkerService workerService) {
         this.listView = listView;
+        this.addView = addView;
+        this.workerService = workerService;
         addModel();
+        fillTable();
         addListeners();
+        addAncestorListener();
     }
 
-    public void addModel(){
-        DefaultTableModel userTableModel =
-                new DefaultTableModel( new Object[]{ "Customer id", "First name", "Last name" }, 0 );
-
-        String[] data = new String[3];
-
-        data[0] = "Nome";
-        data[1] = "Sobrenome";
-        data[2] = "Address";
-
-
-        userTableModel.addRow(data);
-
-        data[0] = "Nome";
-        data[1] = "Sobrenome";
-        data[2] = "Endereço";
-
-        userTableModel.addRow(data);
-        listView.getTblListWorkers().setModel(userTableModel);
+    public void addModel() {
+        workerTableModel = new WorkerTableModel();
+        listView.getTblListWorkers().setModel(workerTableModel);
         listView.getTblListWorkers().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
     }
 
-    public void addListeners(){
+    public void fillTable() {
+        clearTable();
+        List<Worker> workers = workerService.findAll();
+        workerTableModel.addItems(workers);
+    }
+
+    public void addListeners() {
         listView.getBtnEdit().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                MainView.getTabbedPane().setSelectedIndex(0);
-                System.out.println("Conectou");
+                fillEditFields();
             }
         });
 
         listView.getBtnDelete().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("Cancelou");
+                int result = JOptionPane.showConfirmDialog(null, "Deseja Realmente excluir o item selecionado?",
+                        "Atenção.", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    deleteItem();
+                }
+                fillTable();
+                addView.clearFields();
             }
         });
 
     }
 
-    //tabCliente.setSelectedIndex(0);
+    public void fillEditFields() {
+        int selectedRow = listView.getTblListWorkers().getSelectedRow();
+        MainView.getTabbedPane().setSelectedIndex(0);
+        Worker worker = workerTableModel.getItem(selectedRow);
+        addView.getTfName().setText(worker.getName());
+        addView.getTfLastName().setText(worker.getLastname());
+        setSelected(worker.getType());
+        addView.getTfAddress().setText(worker.getAddress());
+        addView.getTfEmail1().setText(worker.getEmail1());
+        addView.getTfEmail2().setText(worker.getEmail2());
+        addView.getTfPhone1().setText(worker.getPhone1());
+        addView.getTfPhone2().setText(worker.getPhone2());
+        addView.getTfProfession().setText(worker.getProfession());
+        addView.getTfDescription().setText(worker.getDescription());
+        addView.setId(worker.getId());
+        addView.setEdit(true);
+    }
+
+    public void setSelected(String type) {
+        switch (type){
+            case "Autônomo":
+                addView.getRadioButtonAutonomous().setSelected(true);
+                addView.getRadioButtonBusinessMan().setSelected(false);
+                addView.getRadioButtonFreeLancer().setSelected(false);
+                break;
+            case "Empresário":
+                addView.getRadioButtonAutonomous().setSelected(false);
+                addView.getRadioButtonBusinessMan().setSelected(true);
+                addView.getRadioButtonFreeLancer().setSelected(false);
+                break;
+            case "Free Lancer":
+                addView.getRadioButtonAutonomous().setSelected(false);
+                addView.getRadioButtonBusinessMan().setSelected(false);
+                addView.getRadioButtonFreeLancer().setSelected(true);
+                break;
+        }
+    }
+
+    public void deleteItem() {
+        int selectedRow = listView.getTblListWorkers().getSelectedRow();
+        Worker worker = workerTableModel.getItem(selectedRow);
+        workerService.remove(worker);
+    }
+
+    public void addAncestorListener() {
+        addView.addAncestorListener(new AncestorListener() {
+            @Override
+            public void ancestorAdded(AncestorEvent event) {
+            }
+
+            @Override
+            public void ancestorRemoved(AncestorEvent event) {
+                fillTable();
+            }
+
+            @Override
+            public void ancestorMoved(AncestorEvent event) {
+            }
+        });
+    }
+
+    public void clearTable() {
+        workerTableModel.clear();
+    }
 
 }

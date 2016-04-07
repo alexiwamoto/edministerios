@@ -37,18 +37,16 @@ public class MainView extends JFrame{
 
     public void setUpLayout(){
         setTitle("Projeto Escola de Ministérios");
-        setSize(600, 500);
-        setLocation(300,100);
-/*        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            // If Nimbus is not available, you can set the GUI to another look and feel.
-        }*/
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = (int) (dimension.getHeight() - (dimension.getHeight()*0.3));
+        int width = (int) (dimension.getWidth() - (dimension.getWidth() * 0.5));
+        setSize(width, height);
+
+        setLocationRelativeTo(null);
+
+        //setExtendedState(MAXIMIZED_BOTH);
+
     }
 
     public void basicControl(){

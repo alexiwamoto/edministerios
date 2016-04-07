@@ -10,6 +10,7 @@ import com.eministerios.www.business.workerUi.add.view.AddView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
@@ -40,22 +41,13 @@ public class AddController {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 addView.clearFields();
-                workerService.findByProfession("pedreiro");
-                /*DirectoryChooser dc = new DirectoryChooser();
-                File file = dc.showDialog(null);
-                if (file != null) {
-                    String strFormat = "/Curriculo_" + employee.getName() + employee.getLastName() + ".pdf";
-                    file = new File(file.getAbsolutePath() + strFormat);
-                    CurriculoHelper ch = new CurriculoHelper(employee, file.toString());
-                }*/
-                System.out.println("Conectou");
             }
         });
 
         addView.getBtnCancel().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                System.out.println("Cancelou");
+
             }
         });
 
@@ -68,12 +60,16 @@ public class AddController {
                     ValidationError validationError = errors.get();
                     Notifications.showFormValidationAlert(validationError.getMessage());
                 } else {
+                    if(addView.isEdit())
+                        worker.setId(addView.getId());
                     workerService.save(worker);
+                    JOptionPane.showMessageDialog(null, "Cadastro feito com sucesso",
+                            "Sucesso.", JOptionPane.PLAIN_MESSAGE);
+                    addView.clearFields();
                 }
-
-
-                System.out.printf("Salvou");
+                addView.setEdit(false);
             }
         });
     }
+
 }

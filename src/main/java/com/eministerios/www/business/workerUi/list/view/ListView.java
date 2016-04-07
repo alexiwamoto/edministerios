@@ -26,7 +26,6 @@ public class ListView extends JPanel {
     }
 
     private void initialize() {
-        //uiComponents = new UiComponents();
         setUpLayout();
         createListPanel();
         createButtonsPanel();
@@ -91,6 +90,9 @@ public class ListView extends JPanel {
         this.tblListWorkers = tblListWorkers;
     }
 
+}
+
+
     /*private void createSpeedPanel() {
         JPanel speedPanel = new JPanel();
         speedPanel.setLayout(new MigLayout("", "[][700px][]", "[20px][150px]"));
@@ -124,9 +126,6 @@ public class ListView extends JPanel {
 /*    public void showSpeed(Integer speed) {
         speedLbl.setText(speed.toString());
     }*/
-
-
-}
 
 /*
 public class MainMenu extends javax.swing.JFrame {
@@ -266,5 +265,28 @@ lblBelow = new JLabel("Abaixo de 100 Km");
     }
 
 }*/
+
+        /*DefaultTableModel userTableModel =
+                new DefaultTableModel( new Object[]{ "Customer id", "First name", "Last name" }, 0 );
+
+        String[] data = new String[3];
+
+        data[0] = "Nome";
+        data[1] = "Sobrenome";
+        data[2] = "Address";
+
+
+        userTableModel.addRow(data);
+
+        data[0] = "Nome";
+        data[1] = "Sobrenome";
+        data[2] = "Endereço";
+
+        userTableModel.addRow(data);*/
+
+
+/*    @Modifying
+    @Query("UPDATE Worker w set w.firstname = ?1, u.lastname = ?2 where u.id = ?3")
+    void setUserInfoById(String firstname, String lastname, Integer userId);*/
 
 

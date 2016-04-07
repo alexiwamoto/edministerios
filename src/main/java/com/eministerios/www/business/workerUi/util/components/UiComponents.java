@@ -1,9 +1,7 @@
 package com.eministerios.www.business.workerUi.util.components;
 
-
 import org.jdesktop.swingx.prompt.PromptSupport;
 import org.springframework.stereotype.Component;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -22,6 +20,13 @@ public class UiComponents {
         jButton.setForeground(new Color(255, 255, 255));
         jButton.setFont(new Font("Arial", Font.PLAIN, 13));
         return jButton;
+    }
+
+    public JRadioButton createStandardRadioButton(JRadioButton jRadioButton, String label){
+        jRadioButton.setText(label);
+        jRadioButton.setForeground(new Color(255, 255, 255));
+        jRadioButton.setFont(new Font("Arial", Font.PLAIN, 13));
+        return jRadioButton;
     }
 
     public JLabel createStandardLabel(JLabel jLabel, String label){
@@ -43,6 +48,14 @@ public class UiComponents {
         PromptSupport.setBackground(Color.WHITE, jTextField);
         PromptSupport.setFontStyle(Font.ITALIC, jTextField);
         jTextField.setColumns(5);
+        return jTextField;
+    }
+
+    public JTextField createStandardFTF(JFormattedTextField jTextField, String placeholder){
+        PromptSupport.setPrompt(placeholder, jTextField);
+        PromptSupport.setFocusBehavior(PromptSupport.FocusBehavior.HIDE_PROMPT, jTextField);
+        PromptSupport.setBackground(Color.WHITE, jTextField);
+        PromptSupport.setFontStyle(Font.ITALIC, jTextField);
         return jTextField;
     }
 

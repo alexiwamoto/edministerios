@@ -52,10 +52,12 @@
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.13" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aspects:4.2.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:9.4-1206-jdbc41" level="project" />
+    <orderEntry type="library" name="Maven: hsqldb:hsqldb:1.8.0.10" level="project" />
     <orderEntry type="library" name="Maven: com.miglayout:miglayout:3.7.4" level="project" />
     <orderEntry type="library" name="Maven: org.swinglabs.swingx:swingx-all:1.6.5-1" level="project" />
     <orderEntry type="library" name="Maven: com.h2database:h2:1.4.184" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" name="Maven: com.toedter:jcalendar:1.4" level="project" />
+    <orderEntry type="library" name="Maven: com.itextpdf:itextpdf:5.5.3" level="project" />
   </component>
 </module>

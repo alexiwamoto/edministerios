@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.text.ParseException;
 
 /**
  * Created by alexandre on 04/03/16.
@@ -22,8 +24,8 @@ public class AddView extends JPanel {
     private JTextField tfName;
     private JTextField tfLastName;
     private JTextField tfAddress;
-    private JTextField tfPhone1;
-    private JTextField tfPhone2;
+    private JFormattedTextField tfPhone1;
+    private JFormattedTextField tfPhone2;
     private JTextField tfProfession;
     private JTextArea tfDescription;
 
@@ -31,8 +33,14 @@ public class AddView extends JPanel {
     private JButton btnCancel;
     private JButton btnClearFields;
 
+    private JRadioButton radioButtonAutonomous;
+    private JRadioButton radioButtonBusinessMan;
+    private JRadioButton radioButtonFreeLancer;
+
     private UiComponents uiComponents;
 
+    private Long id;
+    private boolean isEdit = false;
 
     @Autowired
     public AddView(UiComponents uiComponents) {
@@ -76,7 +84,7 @@ public class AddView extends JPanel {
 
     public void createDataPanel(){
         JPanel dataPanel = new JPanel();
-        uiComponents.createStandartPanel(dataPanel, new MigLayout("", "[][grow]", "[][][][][][][][][]"));
+        uiComponents.createStandartPanel(dataPanel, new MigLayout("", "[][grow]", "[][][][][][][][][][]"));
 
         JLabel lblName = new JLabel();
         uiComponents.createStandardLabel(lblName, "Nome:");
@@ -89,6 +97,23 @@ public class AddView extends JPanel {
 
         tfLastName = new JTextField();
         uiComponents.createStandardTF(tfLastName, "Silva");
+
+        JLabel lblType = new JLabel();
+        uiComponents.createStandardLabel(lblType, "Tipo:");
+
+        ButtonGroup bg = new ButtonGroup();
+        radioButtonAutonomous = new JRadioButton();
+        radioButtonAutonomous.setSelected(true);
+        radioButtonBusinessMan = new JRadioButton();
+        radioButtonFreeLancer = new JRadioButton();
+
+        uiComponents.createStandardRadioButton(radioButtonAutonomous, "Autônomo");
+        uiComponents.createStandardRadioButton(radioButtonBusinessMan, "Empresário");
+        uiComponents.createStandardRadioButton(radioButtonFreeLancer, "Free Lancer");
+
+        bg.add(radioButtonAutonomous);
+        bg.add(radioButtonBusinessMan);
+        bg.add(radioButtonFreeLancer);
 
         JLabel lblAddress = new JLabel();
         uiComponents.createStandardLabel(lblAddress, "Endereço:");
@@ -111,14 +136,24 @@ public class AddView extends JPanel {
         JLabel lblPhone1 = new JLabel();
         uiComponents.createStandardLabel(lblPhone1, "Phone 1:");
 
-        tfPhone1 = new JTextField();
-        uiComponents.createStandardTF(tfPhone1, "11999999999");
+        try {
+            tfPhone1 = new JFormattedTextField(new MaskFormatter("(##)*####-####"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        uiComponents.createStandardFTF(tfPhone1, "11999999999");
 
         JLabel lblPhone2 = new JLabel();
         uiComponents.createStandardLabel(lblPhone2, "Phone 2:");
 
-        tfPhone2 = new JTextField();
-        uiComponents.createStandardTF(tfPhone2, "11999999999");
+        try {
+            tfPhone2 = new JFormattedTextField(new MaskFormatter("(##)*####-####"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        uiComponents.createStandardFTF(tfPhone2, "11999999999");
 
         JLabel lblProfession = new JLabel();
         uiComponents.createStandardLabel(lblProfession, "Profissão:");
@@ -138,8 +173,12 @@ public class AddView extends JPanel {
         dataPanel.add(tfName, "cell 1 0,growx");
         dataPanel.add(lblLastName, "cell 0 1");
         dataPanel.add(tfLastName, "cell 1 1,growx");
-        dataPanel.add(lblAddress, "cell 0 2");
-        dataPanel.add(tfAddress, "cell 1 2,growx");
+        dataPanel.add(lblType, "cell 0 2");
+        dataPanel.add(radioButtonAutonomous,"cell 1 2");
+        dataPanel.add(radioButtonBusinessMan, "cell 1 2");
+        dataPanel.add(radioButtonFreeLancer, "cell 1 2");
+        dataPanel.add(lblAddress, "cell 0 3");
+        dataPanel.add(tfAddress, "cell 1 3,growx");
         dataPanel.add(lblEmail1, "cell 0 4");
         dataPanel.add(tfEmail1, "cell 1 4,growx");
         dataPanel.add(lblEmail2, "cell 0 5");
@@ -161,6 +200,8 @@ public class AddView extends JPanel {
         uiComponents.createStandartPanel(dataPanel, new MigLayout("", "[120px][][][]", "[]"));
 
         btnClearFields = new JButton();
+        btnSave = new JButton("Salvar");
+        //btnSave.setIcon(new ImageIcon(getClass().getResource("/images/saveIcon.png")));
         dataPanel.add(uiComponents.createStandardButton(btnClearFields, "Limpar Campos"), "cell 1 0");
 
         btnCancel = new JButton();
@@ -176,11 +217,14 @@ public class AddView extends JPanel {
         Worker worker = new Worker();
         worker.setName(tfName.getText());
         worker.setLastname(tfLastName.getText());
+        worker.setType(getSelected());
         worker.setAddress(tfAddress.getText());
         worker.setEmail1(tfEmail1.getText());
         worker.setEmail2(tfEmail2.getText());
-        worker.setPhone1(tfPhone1.getText());
-        worker.setPhone2(tfPhone2.getText());
+        String phone = tfPhone1.getText().replace("(","").replace(")","").replace("-","");
+        worker.setPhone1(phone);
+        String phone2 = tfPhone2.getText().replace("(","").replace(")","").replace("-","");
+        worker.setPhone2(phone2);
         worker.setProfession(tfProfession.getText());
         worker.setDescription(tfDescription.getText());
         return worker;
@@ -189,6 +233,7 @@ public class AddView extends JPanel {
     public void clearFields(){
         tfName.setText("");
         tfLastName.setText("");
+        radioButtonAutonomous.setSelected(true);
         tfAddress.setText("");
         tfEmail1.setText("");
         tfEmail2.setText("");
@@ -196,6 +241,15 @@ public class AddView extends JPanel {
         tfPhone2.setText("");
         tfProfession.setText("");
         tfDescription.setText("");
+    }
+
+    public String getSelected(){
+        if(radioButtonAutonomous.isSelected())
+            return "Autônomo";
+        else if(radioButtonBusinessMan.isSelected())
+            return "Empresário";
+        else
+            return  "Free Lancer";
     }
 
     public JTextField getTfEmail1() {
@@ -230,6 +284,30 @@ public class AddView extends JPanel {
         this.tfLastName = tfLastName;
     }
 
+    public JRadioButton getRadioButtonAutonomous() {
+        return radioButtonAutonomous;
+    }
+
+    public void setRadioButtonAutonomous(JRadioButton radioButtonAutonomous) {
+        this.radioButtonAutonomous = radioButtonAutonomous;
+    }
+
+    public JRadioButton getRadioButtonBusinessMan() {
+        return radioButtonBusinessMan;
+    }
+
+    public void setRadioButtonBusinessMan(JRadioButton radioButtonBusinessMan) {
+        this.radioButtonBusinessMan = radioButtonBusinessMan;
+    }
+
+    public JRadioButton getRadioButtonFreeLancer() {
+        return radioButtonFreeLancer;
+    }
+
+    public void setRadioButtonFreeLancer(JRadioButton radioButtonFreeLancer) {
+        this.radioButtonFreeLancer = radioButtonFreeLancer;
+    }
+
     public JTextField getTfAddress() {
         return tfAddress;
     }
@@ -238,19 +316,19 @@ public class AddView extends JPanel {
         this.tfAddress = tfAddress;
     }
 
-    public JTextField getTfPhone1() {
+    public JFormattedTextField getTfPhone1() {
         return tfPhone1;
     }
 
-    public void setTfPhone1(JTextField tfPhone1) {
+    public void setTfPhone1(JFormattedTextField tfPhone1) {
         this.tfPhone1 = tfPhone1;
     }
 
-    public JTextField getTfPhone2() {
+    public JFormattedTextField getTfPhone2() {
         return tfPhone2;
     }
 
-    public void setTfPhone2(JTextField tfPhone2) {
+    public void setTfPhone2(JFormattedTextField tfPhone2) {
         this.tfPhone2 = tfPhone2;
     }
 
@@ -293,4 +371,21 @@ public class AddView extends JPanel {
     public void setBtnClearFields(JButton btnClearFields) {
         this.btnClearFields = btnClearFields;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isEdit() {
+        return isEdit;
+    }
+
+    public void setEdit(boolean edit) {
+        isEdit = edit;
+    }
+
 }
