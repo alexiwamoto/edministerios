@@ -58,9 +58,7 @@ public class CurriculoHelper {
 
             doc.add(separatorText("EXPERIÊNCIA PROFISSIONAL"));
             doc.add(lineSeparator());
-            doc.add(separatorText("    - Descrição das competências: "));
-            doc.add(separatorText("     " + emp.getDescription()));
-
+            doc.add(separatorText("    - Descrição das competências: \n" + emp.getDescription()));
 
         } catch (FileNotFoundException | DocumentException ex) {
             Logger.getLogger(CurriculoHelper.class.getName()).log(Level.SEVERE, null, ex);
