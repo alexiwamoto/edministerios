@@ -37,6 +37,10 @@ public class AddView extends JPanel {
     private JRadioButton radioButtonBusinessMan;
     private JRadioButton radioButtonFreeLancer;
 
+    private JRadioButton radioButtonCenter;
+    private JRadioButton radioButtonEast;
+    private JRadioButton radioButtonSouth;
+
     private UiComponents uiComponents;
 
     private Long id;
@@ -70,13 +74,13 @@ public class AddView extends JPanel {
 
     public void createLogoPanel(){
         JLabel imgLabel = new JLabel();
-        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("img/logo.png")).getImage().getScaledInstance(60, 60, Image.SCALE_DEFAULT));
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("img/logo.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
         imgLabel.setIcon(imageIcon);
 
         JPanel imagePanel = new JPanel();
         uiComponents.createStandartPanel(imagePanel, new MigLayout("", "[][][]", "[]"));
 
-        imagePanel.setSize(30,30);
+        imagePanel.setSize(100,100);
         imagePanel.add(imgLabel, "cell 0 0");
 
         add(imagePanel, BorderLayout.NORTH);
@@ -84,7 +88,7 @@ public class AddView extends JPanel {
 
     public void createDataPanel(){
         JPanel dataPanel = new JPanel();
-        uiComponents.createStandartPanel(dataPanel, new MigLayout("", "[][grow]", "[][][][][][][][][][]"));
+        uiComponents.createStandartPanel(dataPanel, new MigLayout("", "[][grow]", "[][][][][][][][][][][]"));
 
         JLabel lblName = new JLabel();
         uiComponents.createStandardLabel(lblName, "Nome:");
@@ -97,6 +101,23 @@ public class AddView extends JPanel {
 
         tfLastName = new JTextField();
         uiComponents.createStandardTF(tfLastName, "Silva");
+
+        JLabel lblChurch = new JLabel();
+        uiComponents.createStandardLabel(lblChurch, "Congregação:");
+
+        ButtonGroup bgc = new ButtonGroup();
+        radioButtonCenter = new JRadioButton();
+        radioButtonCenter.setSelected(true);
+        radioButtonEast = new JRadioButton();
+        radioButtonSouth = new JRadioButton();
+
+        uiComponents.createStandardRadioButton(radioButtonCenter, "Sede");
+        uiComponents.createStandardRadioButton(radioButtonEast, "Zona Leste");
+        uiComponents.createStandardRadioButton(radioButtonSouth, "Zona Sul");
+
+        bgc.add(radioButtonCenter);
+        bgc.add(radioButtonEast);
+        bgc.add(radioButtonSouth);
 
         JLabel lblType = new JLabel();
         uiComponents.createStandardLabel(lblType, "Tipo:");
@@ -179,18 +200,22 @@ public class AddView extends JPanel {
         dataPanel.add(radioButtonFreeLancer, "cell 1 2");
         dataPanel.add(lblAddress, "cell 0 3");
         dataPanel.add(tfAddress, "cell 1 3,growx");
-        dataPanel.add(lblEmail1, "cell 0 4");
-        dataPanel.add(tfEmail1, "cell 1 4,growx");
-        dataPanel.add(lblEmail2, "cell 0 5");
-        dataPanel.add(tfEmail2, "cell 1 5,growx");
-        dataPanel.add(lblPhone1, "cell 0 6");
-        dataPanel.add(tfPhone1, "cell 1 6,growx");
-        dataPanel.add(lblPhone2, "cell 0 7");
-        dataPanel.add(tfPhone2, "cell 1 7,growx");
-        dataPanel.add(lblProfession, "cell 0 8");
-        dataPanel.add(tfProfession, "cell 1 8,growx");
-        dataPanel.add(lblDescription, "cell 0 9");
-        dataPanel.add(tfDescription, "cell 1 9,growx");
+        dataPanel.add(lblChurch, "cell 0 4");
+        dataPanel.add(radioButtonCenter,"cell 1 4");
+        dataPanel.add(radioButtonEast, "cell 1 4");
+        dataPanel.add(radioButtonSouth, "cell 1 4");
+        dataPanel.add(lblEmail1, "cell 0 5");
+        dataPanel.add(tfEmail1, "cell 1 5,growx");
+        dataPanel.add(lblEmail2, "cell 0 6");
+        dataPanel.add(tfEmail2, "cell 1 6,growx");
+        dataPanel.add(lblPhone1, "cell 0 7");
+        dataPanel.add(tfPhone1, "cell 1 7,growx");
+        dataPanel.add(lblPhone2, "cell 0 8");
+        dataPanel.add(tfPhone2, "cell 1 8,growx");
+        dataPanel.add(lblProfession, "cell 0 9");
+        dataPanel.add(tfProfession, "cell 1 9,growx");
+        dataPanel.add(lblDescription, "cell 0 10");
+        dataPanel.add(tfDescription, "cell 1 10,growx");
 
         add(dataPanel, BorderLayout.CENTER);
     }

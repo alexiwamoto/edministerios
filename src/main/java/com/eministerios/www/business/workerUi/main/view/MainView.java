@@ -37,14 +37,16 @@ public class MainView extends JFrame{
 
     public void setUpLayout(){
         setTitle("Projeto Escola de Ministérios");
-        setSize(600, 500);
+
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int height = (int) (dimension.getHeight() - (dimension.getHeight()*0.2));
+        int width = (int) (dimension.getWidth() - (dimension.getWidth() * 0.5));
+        setSize(width, height);
+
         setLocationRelativeTo(null);
 
-/*        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-        setSize(dimension);
+        //setExtendedState(MAXIMIZED_BOTH);
 
-        setExtendedState(MAXIMIZED_BOTH);*/
-        //setLocation(300,100);
     }
 
     public void basicControl(){
