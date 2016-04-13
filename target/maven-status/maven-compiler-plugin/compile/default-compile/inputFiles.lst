@@ -19,6 +19,7 @@
 /home/alexandre/Workspace/edministerios/src/main/java/com/eministerios/www/business/validation/Validator.java
 /home/alexandre/Workspace/edministerios/src/main/java/com/eministerios/www/business/repository/WorkerRepository.java
 /home/alexandre/Workspace/edministerios/src/main/java/com/eministerios/www/business/entity/domain/Worker.java
+/home/alexandre/Workspace/edministerios/src/main/java/com/eministerios/www/business/workerUi/InitView.java
 /home/alexandre/Workspace/edministerios/src/main/java/com/eministerios/www/business/workerUi/util/components/UiComponents.java
 /home/alexandre/Workspace/edministerios/src/main/java/com/eministerios/www/business/workerUi/add/view/AddView.java
 /home/alexandre/Workspace/edministerios/src/main/java/com/eministerios/www/business/workerUi/list/model/WorkerTableModel.java
