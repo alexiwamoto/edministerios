@@ -37,6 +37,7 @@ public class SearchView extends JPanel{
         setUpLayout();
         createSearchFieldPanel();
         createFoundListPanel();
+        createButtonsPanel();
 
     }
 
@@ -66,7 +67,7 @@ public class SearchView extends JPanel{
 
     private void createFoundListPanel(){
         JPanel listPanel = new JPanel();
-        uiComponents.createStandartPanel(listPanel, new MigLayout("", "[][grow][]","[][]"));
+        uiComponents.createStandartPanel(listPanel, new MigLayout("", "[][grow][]","[grow]"));
 
         JScrollPane scrollPane = new JScrollPane();
         listPanel.add(scrollPane, "cell 1 0, growx, growy");
@@ -75,11 +76,25 @@ public class SearchView extends JPanel{
         tblList.setFillsViewportHeight(true);
         scrollPane.setViewportView(tblList);
 
+        add(listPanel, BorderLayout.CENTER);
+    }
+
+    private void createButtonsPanel(){
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        String pix = String.valueOf(dimension.getWidth()-200);
+        JPanel buttonPanel = new JPanel();
+        uiComponents.createStandartPanel(buttonPanel, new MigLayout("", "[20%][20%][20%][25%][15%]", "[grow]"));
+
         btnShow = new JButton();
         uiComponents.createStandardButton(btnShow, "Visualizar");
-        listPanel.add(btnShow, "cell 1 1, alignx center");
+        buttonPanel.add(btnShow, "cell 2 0 , growx, alignx center");
 
-        add(listPanel, BorderLayout.CENTER);
+        JLabel imgLabel = new JLabel();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("img/logo.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        imgLabel.setIcon(imageIcon);
+        buttonPanel.add(imgLabel, "cell 4 0, alignx left");
+
+        this.add(buttonPanel, BorderLayout.PAGE_END);
     }
 
     public JButton getBtnSearch() {

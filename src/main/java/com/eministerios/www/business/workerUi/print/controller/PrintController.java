@@ -41,6 +41,7 @@ public class PrintController {
             printView.getLblLastName().setText(worker.getLastname());
             printView.getLblType().setText("Tipo: " + worker.getType());
             printView.getLblAddress().setText("Endereço: " + worker.getAddress());
+            printView.getLblChurch().setText("Congregação: " + worker.getChurch());
             printView.getLblEmail1().setText("Email 1: " + worker.getEmail1());
             printView.getLblEmail2().setText("Email 2: " + worker.getEmail2());
             printView.getLblPhone1().setText("Phone 1: " + StringParser.transformPhone(worker.getPhone1()));

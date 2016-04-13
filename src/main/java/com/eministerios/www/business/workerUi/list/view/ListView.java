@@ -38,7 +38,7 @@ public class ListView extends JPanel {
     private void createListPanel() {
 
         JPanel listPanel = new JPanel();
-        uiComponents.createStandartPanel(listPanel, new MigLayout("", "[][grow][]","[]"));
+        uiComponents.createStandartPanel(listPanel, new MigLayout("", "[][grow][]","[grow]"));
 
         JScrollPane scrollPaneListWorkers = new JScrollPane();
         listPanel.add(scrollPaneListWorkers, "cell 1 0, growx, growy");
@@ -52,8 +52,10 @@ public class ListView extends JPanel {
     }
 
     private void createButtonsPanel(){
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        String pix = String.valueOf(dimension.getWidth()-200);
         JPanel buttonsPanel = new JPanel();
-        uiComponents.createStandartPanel(buttonsPanel, new MigLayout("", "[][][][][][]", "[grow]"));
+        uiComponents.createStandartPanel(buttonsPanel, new MigLayout("", "[][][][][" + pix +"px][]", "[grow]"));
 
         btnEdit = new JButton();
         uiComponents.createStandardButton(btnEdit, "Editar");
@@ -62,6 +64,11 @@ public class ListView extends JPanel {
         btnDelete = new JButton();
         uiComponents.createStandardButton(btnDelete, "Remover");
         buttonsPanel.add(btnDelete, "cell 3 0 , growx, alignx center");
+
+        JLabel imgLabel = new JLabel();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon(getClass().getClassLoader().getResource("img/logo.png")).getImage().getScaledInstance(100, 100, Image.SCALE_DEFAULT));
+        imgLabel.setIcon(imageIcon);
+        buttonsPanel.add(imgLabel, "cell 5 0, alignx left");
 
         this.add(buttonsPanel, BorderLayout.PAGE_END);
     }

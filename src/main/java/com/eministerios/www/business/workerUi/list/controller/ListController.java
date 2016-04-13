@@ -85,6 +85,7 @@ public class ListController {
         addView.getTfLastName().setText(worker.getLastname());
         setSelected(worker.getType());
         addView.getTfAddress().setText(worker.getAddress());
+        setChurch(worker.getChurch());
         addView.getTfEmail1().setText(worker.getEmail1());
         addView.getTfEmail2().setText(worker.getEmail2());
         addView.getTfPhone1().setText(worker.getPhone1());
@@ -111,6 +112,26 @@ public class ListController {
                 addView.getRadioButtonAutonomous().setSelected(false);
                 addView.getRadioButtonBusinessMan().setSelected(false);
                 addView.getRadioButtonFreeLancer().setSelected(true);
+                break;
+        }
+    }
+
+    public void setChurch(String type) {
+        switch (type){
+            case "Sede":
+                addView.getRadioButtonCenter().setSelected(true);
+                addView.getRadioButtonEast().setSelected(false);
+                addView.getRadioButtonSouth().setSelected(false);
+                break;
+            case "Zona Leste":
+                addView.getRadioButtonCenter().setSelected(false);
+                addView.getRadioButtonEast().setSelected(true);
+                addView.getRadioButtonSouth().setSelected(false);
+                break;
+            case "Zona Sul":
+                addView.getRadioButtonCenter().setSelected(false);
+                addView.getRadioButtonEast().setSelected(false);
+                addView.getRadioButtonSouth().setSelected(true);
                 break;
         }
     }

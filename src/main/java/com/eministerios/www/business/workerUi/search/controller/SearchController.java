@@ -9,6 +9,7 @@ import com.eministerios.www.business.workerUi.search.view.SearchView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import javax.swing.*;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 import java.awt.event.ActionEvent;
@@ -54,11 +55,16 @@ public class SearchController {
             public void actionPerformed(ActionEvent actionEvent) {
                 int selectedRow = searchView.getTblList().getSelectedRow();
 
-                Worker worker = workerTableModel.getItem(selectedRow);
+                if(selectedRow >=0){
+                    Worker worker = workerTableModel.getItem(selectedRow);
 
-                printView.setWorker(worker);
+                    printView.setWorker(worker);
 
-                printView.setVisible(true);
+                    printView.setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Selecione Profissional", "Aviso", JOptionPane.OK_OPTION);
+                }
             }
         });
     }

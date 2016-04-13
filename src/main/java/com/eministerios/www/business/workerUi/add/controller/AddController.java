@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.swing.*;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Optional;
@@ -34,6 +36,7 @@ public class AddController {
         this.addView = addView;
         this.workerValidator = workerValidator;
         addListeners();
+        addAncestorListener();
     }
 
     public void addListeners(){
@@ -47,7 +50,7 @@ public class AddController {
         addView.getBtnCancel().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-
+                addView.clearFields();
             }
         });
 
@@ -68,6 +71,24 @@ public class AddController {
                     addView.clearFields();
                 }
                 addView.setEdit(false);
+            }
+        });
+    }
+
+    public void addAncestorListener() {
+        addView.addAncestorListener(new AncestorListener() {
+            @Override
+            public void ancestorAdded(AncestorEvent event) {
+
+            }
+
+            @Override
+            public void ancestorRemoved(AncestorEvent event) {
+                addView.clearFields();
+            }
+
+            @Override
+            public void ancestorMoved(AncestorEvent event) {
             }
         });
     }
