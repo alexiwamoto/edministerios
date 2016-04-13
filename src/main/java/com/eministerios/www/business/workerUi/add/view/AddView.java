@@ -244,6 +244,7 @@ public class AddView extends JPanel {
         worker.setLastname(tfLastName.getText());
         worker.setType(getSelected());
         worker.setAddress(tfAddress.getText());
+        worker.setChurch(getChurchSelected());
         worker.setEmail1(tfEmail1.getText());
         worker.setEmail2(tfEmail2.getText());
         String phone = tfPhone1.getText().replace("(","").replace(")","").replace("-","");
@@ -260,6 +261,7 @@ public class AddView extends JPanel {
         tfLastName.setText("");
         radioButtonAutonomous.setSelected(true);
         tfAddress.setText("");
+        radioButtonCenter.setSelected(true);
         tfEmail1.setText("");
         tfEmail2.setText("");
         tfPhone1.setText("");
@@ -275,6 +277,15 @@ public class AddView extends JPanel {
             return "Empresário";
         else
             return  "Free Lancer";
+    }
+
+    public String getChurchSelected(){
+        if(radioButtonCenter.isSelected())
+            return "Sede";
+        else if(radioButtonEast.isSelected())
+            return "Zona Leste";
+        else
+            return "Zona Sul";
     }
 
     public JTextField getTfEmail1() {
@@ -339,6 +350,30 @@ public class AddView extends JPanel {
 
     public void setTfAddress(JTextField tfAddress) {
         this.tfAddress = tfAddress;
+    }
+
+    public JRadioButton getRadioButtonCenter() {
+        return radioButtonCenter;
+    }
+
+    public void setRadioButtonCenter(JRadioButton radioButtonCenter) {
+        this.radioButtonCenter = radioButtonCenter;
+    }
+
+    public JRadioButton getRadioButtonEast() {
+        return radioButtonEast;
+    }
+
+    public void setRadioButtonEast(JRadioButton radioButtonEast) {
+        this.radioButtonEast = radioButtonEast;
+    }
+
+    public JRadioButton getRadioButtonSouth() {
+        return radioButtonSouth;
+    }
+
+    public void setRadioButtonSouth(JRadioButton radioButtonSouth) {
+        this.radioButtonSouth = radioButtonSouth;
     }
 
     public JFormattedTextField getTfPhone1() {

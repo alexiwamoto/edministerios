@@ -29,6 +29,9 @@ public class Worker implements Serializable {
   @Column(name = "address")
   private String address;
 
+  @Column(name = "church", nullable = false)
+  private String church;
+
   @Column(name = "email_1")
   private String email_1;
 
@@ -101,6 +104,14 @@ public class Worker implements Serializable {
 
   public void setAddress(String address) {
     this.address = address;
+  }
+
+  public String getChurch() {
+    return church;
+  }
+
+  public void setChurch(String church) {
+    this.church = church;
   }
 
   public String getEmail1() {

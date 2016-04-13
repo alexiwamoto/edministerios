@@ -26,6 +26,7 @@ public class PrintView extends JFrame {
     private JLabel lblLastName;
     private JLabel lblType;
     private JLabel lblAddress;
+    private JLabel lblChurch;
     private JLabel lblEmail1;
     private JLabel lblEmail2;
     private JLabel lblPhone1;
@@ -68,7 +69,7 @@ public class PrintView extends JFrame {
     public void createInfoPanel() {
         infoPanel = new JPanel();
         infoPanel.setBackground(Color.WHITE);
-        infoPanel.setLayout(new MigLayout("", "[40px][grow][20px]", "[40px][][][][][][][][][][][grow]"));
+        infoPanel.setLayout(new MigLayout("", "[40px][grow][20px]", "[40px][][][][][][][][][][][][grow]"));
 
         JLabel lblTitle = new JLabel("Dados do Profissional:");
         lblTitle.setFont(new Font("Verdana", Font.BOLD, 18));
@@ -90,32 +91,36 @@ public class PrintView extends JFrame {
         lblAddress.setFont(new Font("Verdana", Font.ITALIC, 14));
         infoPanel.add(lblAddress, "cell 1 4");
 
+        lblChurch = new JLabel();
+        lblChurch.setFont(new Font("Verdana", Font.ITALIC, 14));
+        infoPanel.add(lblChurch, "cell 1 5");
+
         lblEmail1 = new JLabel();
         lblEmail1.setFont(new Font("Verdana", Font.ITALIC, 14));
-        infoPanel.add(lblEmail1, "cell 1 5");
+        infoPanel.add(lblEmail1, "cell 1 6");
 
         lblEmail2 = new JLabel();
         lblEmail2.setFont(new Font("Verdana", Font.ITALIC, 14));
-        infoPanel.add(lblEmail2, "cell 1 6");
+        infoPanel.add(lblEmail2, "cell 1 7");
 
         lblPhone1 = new JLabel();
         lblPhone1.setFont(new Font("Verdana", Font.ITALIC, 14));
-        infoPanel.add(lblPhone1, "cell 1 7");
+        infoPanel.add(lblPhone1, "cell 1 8");
 
         lblPhone2 = new JLabel();
         lblPhone2.setFont(new Font("Verdana", Font.ITALIC, 14));
-        infoPanel.add(lblPhone2, "cell 1 8");
+        infoPanel.add(lblPhone2, "cell 1 9");
 
         lblProfession = new JLabel();
         lblProfession.setFont(new Font("Verdana", Font.ITALIC, 14));
-        infoPanel.add(lblProfession, "cell 1 9");
+        infoPanel.add(lblProfession, "cell 1 10");
 
         lblDescription = new JTextArea();
         lblDescription.setEditable(false);
         lblDescription.setFont(new Font("Verdana", Font.ITALIC, 14));
         lblDescription.setBorder(null);
         lblDescription.setLineWrap(true);
-        infoPanel.add(lblDescription, "cell 1 10, growx");
+        infoPanel.add(lblDescription, "cell 1 11, growx");
 
         this.add(infoPanel, BorderLayout.CENTER);
     }
@@ -178,6 +183,14 @@ public class PrintView extends JFrame {
 
     public void setLblAddress(JLabel lblAddress) {
         this.lblAddress = lblAddress;
+    }
+
+    public JLabel getLblChurch() {
+        return lblChurch;
+    }
+
+    public void setLblChurch(JLabel lblChurch) {
+        this.lblChurch = lblChurch;
     }
 
     public JLabel getLblEmail1() {

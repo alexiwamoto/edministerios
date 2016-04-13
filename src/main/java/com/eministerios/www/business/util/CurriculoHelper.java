@@ -50,6 +50,7 @@ public class CurriculoHelper {
             doc.add(simpleText("    - Tipo de profissional: " + emp.getType()));
             doc.add(simpleText("    - Profissão: " + emp.getProfession()));
             doc.add(simpleText("    - Endereço: " + emp.getAddress()));
+            doc.add(simpleText("    - Congregação: " + emp.getChurch()));
             doc.add(simpleText("    - Email principal: " + emp.getEmail1()));
             doc.add(simpleText("    - Email secundário: " + emp.getEmail2()));
             doc.add(simpleText("    - Telefone principal: " + StringParser.transformPhone(emp.getPhone1())));
