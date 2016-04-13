@@ -7,29 +7,13 @@ import java.io.Serializable;
  * Created by alexandre on 09/03/16.
  */
 
-/*@Entity
-@SequenceGenerator(name = "nome_seq", sequenceName = "nome_seq_no_banco", allocationSize = 1, initialValue = 1)
-@Table(name = "nome_da_tabela")
-public class HistoricoAcesso implements Serializable {
-  private static final long serialVersionUID = 1L;
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO) //uso o name que coloquei no @SequenceGenerator
-  @Column(name = "id_historico_acesso")
-  private int idHistoricoAcesso;
-  //mais atributos e os gets/sets
-}*/
-
-
 @Entity
-//@SequenceGenerator(name = "id_worker", sequenceName = "worker_id_seq", allocationSize = 1, initialValue = 10)
 @Table(name = "worker")
 public class Worker implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  //@GeneratedValue(generator = "id_worker")
-  /*@GeneratedValue(strategy = GenerationType.IDENTITY)*/
   @Column(name = "id", nullable = false)
   private Long id;
 
